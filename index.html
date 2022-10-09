@@ -16,13 +16,17 @@
       integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
       crossorigin="anonymous"
     ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
+    ></script>
     <link rel="stylesheet" href="./assets/style.css" />
   </head>
 
   <body>
     <header>Weather Dashboard</header>
     <main class="container-fluid">
-      <div class="row">
+      <div class="row mt-3">
         <section class="col-12 col-md-4 col-lg-3 search-form" id="search-form">
           <h2>Search for a City:</h2>
           <input
@@ -38,10 +42,81 @@
           </button>
           <hr />
         </section>
-
+        <section class="col-12 col-md-8 col-lg-9 border border-dark results">
+          <h2>{City} <span id="results">{Date}</span></h2>
+          <ul>
+            <li>Temperature:</li>
+            <li>Wind:</li>
+            <li>Humidity:</li>
+          </ul>
+        </section>
+        <section class="col-12 col-md-8 col-lg-9">
+          <h3>5-Day Forecast</h3>
+          <div class="row">
+            <div class="card">
+              <div class="card-body">
+                <ul>
+                  <li>{Date}</li>
+                  <li>{Icon}</li>
+                  <li>Temperature:</li>
+                  <li>Wind:</li>
+                  <li>Humidity:</li>
+                </ul>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <ul>
+                  <li>{Date}</li>
+                  <li>{Icon}</li>
+                  <li>Temperature:</li>
+                  <li>Wind:</li>
+                  <li>Humidity:</li>
+                </ul>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <ul>
+                  <li>{Date}</li>
+                  <li>{Icon}</li>
+                  <li>Temperature:</li>
+                  <li>Wind:</li>
+                  <li>Humidity:</li>
+                </ul>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <ul>
+                  <li>{Date}</li>
+                  <li>{Icon}</li>
+                  <li>Temperature:</li>
+                  <li>Wind:</li>
+                  <li>Humidity:</li>
+                </ul>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <ul>
+                  <li>{Date}</li>
+                  <li>{Icon}</li>
+                  <li>Temperature:</li>
+                  <li>Wind:</li>
+                  <li>Humidity:</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </main>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
     <script src="./assets/script.js"></script>
   </body>
 </html>

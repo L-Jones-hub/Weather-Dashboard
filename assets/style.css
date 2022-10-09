@@ -11,6 +11,18 @@ header {
   padding-right: 50px;
 }
 
+ul {
+  list-style: none;
+  line-height: 2;
+}
+
 .search {
   margin-left: 10px;
+}
+
+.card {
+  max-width: 200px;
+  background-color: #142d4c;
+  color: white;
+  margin: 10px;
 }
