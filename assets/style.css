@@ -26,3 +26,41 @@ ul {
   color: white;
   margin: 10px;
 }
+.current-temperature {
+  font-weight: 400;
+}
+
+.temperature {
+  font-size: 70px;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  bottom: 320px;
+  left: 240px;
+}
+
+.results {
+  max-height: 25%;
+  background-color: #daf0ff;
+}
+
+#units {
+  position: relative;
+  bottom: 400px;
+  left: 330px;
+  text-decoration: none;
+}
+
+#icon {
+  position: relative;
+  bottom: 220px;
+  left: 330px;
+}
+
+#description {
+  text-transform: capitalize;
+}
+
+#city {
+  margin-left: 30px;
+}
