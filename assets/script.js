@@ -10,22 +10,21 @@ var windEl = document.querySelector("#wind");
 var dateEl = document.querySelector("#date");
 var iconEl = document.querySelector("#icon");
 
-function renderStorage(reversedSearches){
+function renderStorage(reversedSearches) {
   var pastSearches;
-  if(!reversedSearches){
-     pastSearches = JSON.parse(localStorage.getItem('past-searches')).reverse()
+  if (!reversedSearches) {
+    pastSearches = JSON.parse(localStorage.getItem("past-searches")).reverse();
+  } else {
+    pastseaches = reversedSearches;
   }
-  else{
-    pastseaches = reversedSearches
-  }
-  console.log("renderingStorage")
-  var historyDiv = document.getElementById("history")
-  console.log(historyDiv)
-  pastSearches.forEach(previousSearch => {
-    console.log(previousSearch)
-    var button = document.createElement('button')
-    button.addEventListener("click", handleSubmit)
-    historyDiv.append(button)
+  console.log("renderingStorage");
+  var historyDiv = document.getElementById("history");
+  console.log(historyDiv);
+  pastSearches.forEach((previousSearch) => {
+    console.log(previousSearch);
+    var button = document.createElement("button");
+    button.addEventListener("click", handleSubmit);
+    historyDiv.append(button);
   });
 }
 
@@ -60,7 +59,7 @@ function formatDay(timestamp) {
 }
 
 function displayForecast(response) {
-  console.log(response)
+  console.log(response);
   let forecast = response.data.daily;
   let forecastEl = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
@@ -69,7 +68,7 @@ function displayForecast(response) {
       forecastHTML =
         forecastHTML +
         `
-      <div class="col-2">
+      <div class="card" style="width: 18rem;">
         <div class="weather-forecast-date">${formatDay(forecastDay.dt)}</div>
         <img
           src="http://openweathermap.org/img/wn/${
@@ -77,6 +76,7 @@ function displayForecast(response) {
           }@2x.png"
           alt=""
           width="42"
+          class="forecast-icon"
         />
         <div class="weather-forecast-temperatures">
           <span class="weather-forecast-temperature-max"> ${Math.round(
@@ -91,7 +91,7 @@ function displayForecast(response) {
     }
   });
 
-  forecastHTML  += `</div>`;
+  forecastHTML += `</div>`;
   forecastEl.innerHTML = forecastHTML;
 }
 
@@ -132,33 +132,36 @@ function search(city) {
 
 function handleSubmit(event) {
   event.preventDefault();
-  console.log(event.target)
-  if(event.target.id === 'search-form'){
+  console.log(event.target);
+  if (event.target.id === "search-form") {
     var cityInputEl = document.querySelector("#city-input");
     search(cityInputEl.value);
-    addToLocalStorage(cityInputEl.value)
-    return
+    addToLocalStorage(cityInputEl.value);
+    return;
   } else {
-    search(event.target.innerHTML)
+    search(event.target.innerHTML);
   }
-
 }
 
-function addToLocalStorage(newCity){
-  var pastSearches = JSON.parse(localStorage.getItem("past-searches")) || []
-console.log(newCity)
-console.log(pastSearches)
-if(pastSearches.includes(newCity)) {return}
-if(pastSearches.length >=5){
-  pastSearches = pastSearches.shift()
-}
-pastSearches = pastSearches.push(newCity)
-console.log(pastSearches)
-localStorage.setItem("past-searches", JSON.stringify(pastSearches))
-console.log(pastSearches)
-var reversedSearches = pastSearches.reverse()
-renderStorage(reversedSearches)
+function addToLocalStorage(newCity) {
+  var pastSearches = JSON.parse(localStorage.getItem("past-searches")) || [];
+  console.log(newCity);
+  console.log(pastSearches);
+  if (pastSearches.includes(newCity)) {
+    return;
+  }
+  if (pastSearches.length >= 5) {
+    pastSearches = pastSearches.shift();
+  }
+  pastSearches = pastSearches.push(newCity);
+  console.log(pastSearches);
+  localStorage.setItem("past-searches", JSON.stringify(pastSearches));
+  console.log(pastSearches);
+  var reversedSearches = pastSearches.reverse();
+  renderStorage(reversedSearches);
 }
 
 var form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
+
+search(`New York`);
