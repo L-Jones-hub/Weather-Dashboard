@@ -1,6 +1,6 @@
 # Weather-Dashboard
 
-<a href="" title="Deployed Work Day Scheduler" target="_blank">Deployed Site</a>
+<a href="https://l-jones-hub.github.io/Weather-Dashboard/" title="Deployed Work Day Scheduler" target="_blank">Deployed Site</a>
 
 ## Usage
 
