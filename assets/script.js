@@ -10,6 +10,25 @@ var windEl = document.querySelector("#wind");
 var dateEl = document.querySelector("#date");
 var iconEl = document.querySelector("#icon");
 
+function renderStorage(reversedSearches){
+  var pastSearches;
+  if(!reversedSearches){
+     pastSearches = JSON.parse(localStorage.getItem('past-searches')).reverse()
+  }
+  else{
+    pastseaches = reversedSearches
+  }
+  console.log("renderingStorage")
+  var historyDiv = document.getElementById("history")
+  console.log(historyDiv)
+  pastSearches.forEach(previousSearch => {
+    console.log(previousSearch)
+    var button = document.createElement('button')
+    button.addEventListener("click", handleSubmit)
+    historyDiv.append(button)
+  });
+}
+
 function formatDate(timestamp) {
   let date = new Date(timestamp);
   let hours = date.getHours();
@@ -41,9 +60,10 @@ function formatDay(timestamp) {
 }
 
 function displayForecast(response) {
-  var forecast = response.data.daily;
-  var forecastEl = document.querySelector("#forecast");
-  var forecastHTML = `<div class="row">`;
+  console.log(response)
+  let forecast = response.data.daily;
+  let forecastEl = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row">`;
   forecast.forEach(function (forecastDay, index) {
     if (index < 6) {
       forecastHTML =
@@ -71,12 +91,12 @@ function displayForecast(response) {
     }
   });
 
-  forecastHTML = forecastHTML = `<div>`;
+  forecastHTML  += `</div>`;
   forecastEl.innerHTML = forecastHTML;
 }
 
 function getForecast(coordinates) {
-  var apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`;
   axios.get(apiUrl).then(displayForecast);
 }
 
@@ -102,7 +122,6 @@ function displayTemperature(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
-
   getForecast(response.data.coord);
 }
 
@@ -113,11 +132,33 @@ function search(city) {
 
 function handleSubmit(event) {
   event.preventDefault();
-  var cityInputEl = document.querySelector("#city-input");
-  search(cityInputEl.value);
+  console.log(event.target)
+  if(event.target.id === 'search-form'){
+    var cityInputEl = document.querySelector("#city-input");
+    search(cityInputEl.value);
+    addToLocalStorage(cityInputEl.value)
+    return
+  } else {
+    search(event.target.innerHTML)
+  }
+
+}
+
+function addToLocalStorage(newCity){
+  var pastSearches = JSON.parse(localStorage.getItem("past-searches")) || []
+console.log(newCity)
+console.log(pastSearches)
+if(pastSearches.includes(newCity)) {return}
+if(pastSearches.length >=5){
+  pastSearches = pastSearches.shift()
+}
+pastSearches = pastSearches.push(newCity)
+console.log(pastSearches)
+localStorage.setItem("past-searches", JSON.stringify(pastSearches))
+console.log(pastSearches)
+var reversedSearches = pastSearches.reverse()
+renderStorage(reversedSearches)
 }
 
 var form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
-
-search("New York");

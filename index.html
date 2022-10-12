@@ -42,14 +42,8 @@
           <input type="submit" class="btn btn-primary col-12 mt-2">
       </form>     
           <hr />
-          <div class="previous-searches">
-          <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
+          <div id="history" class="previous-searches">
+        
           </div>
         </section>
         <section class="col-md-8 results">
@@ -61,8 +55,6 @@
             <li>Humidity: <span id="humidity"></span>%</li>
             <li>Wind: <span id="wind"></span> mph</li>
           </ul>
-          <!-- <div class="row" class="current" >
-          <span class="current-temperature"> -->
             <img
           src=""
           alt="Clear"
@@ -74,9 +66,9 @@
           </p>
           <hr>
         <div class="col-md-8">
-          <h3>5-Day Forecast</h3>
-          <p class="forecast" id="forecast">
-            </p>
+          <h3 class="hidden" id="fiveDayHeader">5-Day Forecast</h3>
+          <div class="col forecast" id="forecast">
+          </div>
       </section>
           
     </main>
